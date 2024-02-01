@@ -1,6 +1,5 @@
 package org.example.model.user;
 
-import lombok.Builder;
 import lombok.Data;
 
 @Data

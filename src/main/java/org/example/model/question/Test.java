@@ -1,6 +1,7 @@
 package org.example.model.question;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.example.model.user.Student;
 import org.example.service.UserInputReader;
 
@@ -8,19 +9,14 @@ import java.util.*;
 import java.util.concurrent.*;
 
 @Data
+@RequiredArgsConstructor
 public class Test implements ITest{
     private final List<Question> questions;
     private final int timePerQuestion;
     private final UserInputReader userInputReader;
 
-    public Test(List<Question> questions, int timePerQuestion, UserInputReader userInputReader) {
-        this.questions = questions;
-        this.timePerQuestion = timePerQuestion;
-        this.userInputReader = userInputReader;
-    }
-
     @Override
-    public Student conductTest(Student student) {
+    public Student conductTest(Student student) throws RuntimeException {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         int studentAttempts = student.getAttempts();
 
@@ -47,7 +43,7 @@ public class Test implements ITest{
             executorService.shutdown();
         } else {
             System.out.println("You have no attempts");
-            System.exit(0);
+            throw new RuntimeException("Your attempts: " + student.getAttempts());
         }
         return student;
     }

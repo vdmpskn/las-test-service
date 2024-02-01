@@ -4,13 +4,11 @@ import org.example.model.user.Mentor;
 import org.example.model.user.Student;
 import org.example.model.user.User;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.HashMap;
 
 public class AuthenticationService {
 
-    public HashMap<String, User> addUsers() throws NoSuchAlgorithmException, InvalidKeySpecException {
+    private HashMap<String, User> addUsers() {
         HashMap<String, User> users = new HashMap<>();
 
         Student student = new Student();
@@ -35,7 +33,7 @@ public class AuthenticationService {
         return users;
     }
 
-    public User authenticate(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public User authenticate(String username, String password) {
         HashMap<String, User> userHashMap = addUsers();
 
         User retrievedUser = userHashMap.get(username);

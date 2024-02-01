@@ -5,11 +5,7 @@ import org.example.model.question.Question;
 import org.example.model.question.Test;
 import org.example.model.user.Mentor;
 import org.example.model.user.Student;
-import org.example.model.user.User;
-import org.example.service.AuthenticationService;
-import org.example.service.FileIOService;
-import org.example.service.PasswordHash;
-import org.example.service.UserInputReader;
+import org.example.service.*;
 
 
 import java.security.NoSuchAlgorithmException;
@@ -45,12 +41,14 @@ public class Application {
 
        Mentor mentor =(Mentor) authenticationService.authenticate(usernameMentor, passwordMentor);
        Student student = (Student) authenticationService.authenticate(usernameStudent, passwordStudent);
-       
 
-        mentor.getResultsFromFile("src/main/resources/questions.txt");
-//        test.conductTest(student);
+        try {
+            test.conductTest(student);
+        } catch (RuntimeException e){
+            e.printStackTrace();
+        }
 
-//        mentor.viewResults(student, test);
+       // mentor.viewResults(student, test);
 
 //        mentor.getResultsFromFile("src/main/resources/questions.txt");
 
