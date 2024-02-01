@@ -28,6 +28,65 @@ In the future, we plan to develop a full-fledged web application based on this p
 ## Note
 For demonstration purposes, the number of test attempts is set to 1. The mentor has the ability to view not only the student's result but also all their answers.
 
+# Application Usage Guide
+
+## Description
+This application is designed to conduct tests with a time limit for each question, calculate scores using a binary approach, read questions from a file, write results to a file, display student results, authenticate users, encrypt/decrypt data, and allow mentors to view results.
+
+## Usage
+1. Create instances of `Student`, `Test`, `Question`, `Mentor`, and `AuthenticationService`.
+2. Fill in the information about the student, test, and questions.
+3. Create an instance of `ConsoleResultViewer`, `FileResultReader`, `BinaryScoreCalculator`, `Test`, or `EncryptionService`.
+4. For `ConsoleResultViewer`, call the `view(student, test)` method to display test results.
+5. For `FileResultReader`, call the `read(filePath)` method to read results from a file.
+6. For `BinaryScoreCalculator`, call the `calculate(answers, questions)` method to calculate scores.
+7. For `Test`, call the `conductTest(student)` method to conduct a test.
+8. For `AuthenticationService`, call the `authenticate(username, password)` method to authenticate a user.
+9. For `EncryptionService`, call the `encrypt(data)` and `decrypt(encryptedData)` methods to encrypt and decrypt data, respectively.
+10. For `FileIOService`, call the `readQuestionsFromFile(filePath)` and `writeResultsToFile(filePath, student, test)` methods to read questions from a file and write results to a file, respectively.
+11. For `Mentor`, call the `viewResults(student, test)` and `getResultFromFile(filePath)` methods to view results and read results from a file, respectively.
+12. For `Student`, call the `saveAnswers(answers)` and `calculateScore(questions)` methods to save answers and calculate scores, respectively.
+13. For `PasswordHash`, call the `generateStrongPasswordHash(password)` and `validatePassword(enteredPassword, storedHash)` methods to generate a password hash and check a password, respectively.
+
+## Example Code
+```java
+Student student = new Student("First Name", "Last Name", "Student Answers");
+List<String> options = Arrays.asList("Option 1", "Option 2", "Option 3");
+Question question = new Question("Question Text", options, "Correct Answer");
+List<Question> questions = Arrays.asList(question);
+Test test = new Test(questions);
+ConsoleResultViewer viewer = new ConsoleResultViewer();
+FileResultReader reader = new FileResultReader();
+BinaryScoreCalculator calculator = new BinaryScoreCalculator();
+Test testConductor = new Test("Test Questions", "Time per Question", "User Input Reader");
+AuthenticationService authService = new AuthenticationService();
+EncryptionService encryptionService = new EncryptionService();
+FileIOService fileIOService = new FileIOService();
+Mentor mentor = new Mentor();
+PasswordHash passwordHash = new PasswordHash();
+
+viewer.view(student, test);
+reader.read("file path");
+double score = calculator.calculate(student.getAnswers(), test.getQuestions());
+testConductor.conductTest(student);
+User user = authService.authenticate("username", "password");
+String encryptedData = encryptionService.encrypt("data");
+String decryptedData = encryptionService.decrypt(encryptedData);
+List<Question> questionsFromFile = fileIOService.readQuestionsFromFile("file path for questions");
+fileIOService.writeResultsToFile("file path for results", student, test);
+mentor.viewResults(student, test);
+mentor.getResultFromFile("file path for results");
+```
+## Result
+The result will be displayed in the console in the following format:
+```
+Result student: First Name Last Name
+Score: X%
+Question 1: Question Text
+Student answer: Student Answer
+Right answer: Correct Answer
+```
+
 ## Support
 If you encounter any problems or have any questions about this application, please feel free to contact us. You can:
 

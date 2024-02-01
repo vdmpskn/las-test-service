@@ -43,9 +43,11 @@ public class FileResultReader implements ResultReader{
                 }
             }
         } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
             e.printStackTrace();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.err.println("Unexpected error: " + e.getMessage());
+            throw new RuntimeException("Unexpected error occurred", e);
         }
     }
 }
